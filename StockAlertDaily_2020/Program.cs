@@ -4,7 +4,7 @@ using System.Data;
 using System.Net.Mail;
 
 
-namespace StockAlertDaily
+namespace StockAlertDaily_2020_Step2_CHOONHO
 {
     class Program
     {
