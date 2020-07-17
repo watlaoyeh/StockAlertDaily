@@ -105,7 +105,7 @@ namespace StockAlertDaily_2020_Step2_CHOONHO
             mail.To.Add("liau.sheauhuey@gmail.com");
             //mail.To.Add("d.dinesh0211@gmail.com");
             mail.IsBodyHtml = true;
-            mail.Subject = "Stock Alert New Algorithm -  " + DateTime.Now.ToString("yyyy-MM-dd");
+            mail.Subject = "Stock Alert New Algorithm (Sort By TriggerDate) -  " + DateTime.Now.AddDays(1).ToString("yyyy-MM-dd");
             mail.Body = "Hi members, please find the latest Stock Alert for your reference. <br /> " +
             "<br />  <h1>BUY ALERT<h1> <br /> " + textBody +
             "<br />  <h1>SELL ALERT<h1> <br /> " + textBody2;
