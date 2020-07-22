@@ -7,7 +7,7 @@ namespace CombineAllStockAlert
 {
     class Program
     {
-        public static int NoOfDays = 0;
+        public static int NoOfDays = 1;
         static void Main(string[] args)
         {
             Step1();
