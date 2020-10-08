@@ -14,6 +14,7 @@ namespace ConsoleApp5
     
     public class DailyStockPick
     {
+     
         public string stockCounter { get; set; }
         public decimal currentPrice { get; set; }
 
@@ -23,7 +24,7 @@ namespace ConsoleApp5
     }
     class Program
     {
-
+        static int dayCount = 2;
         static List<DailyStockPick> stockPickListUSA = new List<DailyStockPick>();
         static List<DailyStockPick> stockPickListMY = new List<DailyStockPick>();
         static List<DailyStockPick> stockPickListSG = new List<DailyStockPick>();
@@ -378,7 +379,7 @@ namespace ConsoleApp5
             SearchAndDownloadSG(@"https://www.tradingview.com/screener/", driver);
             SearchAndDownloadHK(@"https://www.tradingview.com/screener/", driver);
 
-            genericSendMail();
+            genericSendMail(); 
             //driver.Close();
             System.Environment.Exit(0);
         }
@@ -563,13 +564,13 @@ namespace ConsoleApp5
             //mail.To.Add("d.dinesh0211@gmail.com");
             mail.IsBodyHtml = true;
 
-            mail.Subject = "Daily Stock Pick  - " + DateTime.Now.AddDays(1).ToString("yyyy-MM-dd");
+            mail.Subject = "Daily Stock Pick  - " + DateTime.Now.AddDays(dayCount).ToString("yyyy-MM-dd");
             mail.Body = "Hi members, please find the latest Stock Alert for your reference. <br /> " +
             "<br />  " + textBody;
             SmtpClient smtp = new SmtpClient();
             smtp.Host = "smtp.gmail.com";
             smtp.Port = 587;
-            smtp.Credentials = new System.Net.NetworkCredential("liausheauchang@gmail.com", "EXCUSEme123$567*90");
+            smtp.Credentials = new System.Net.NetworkCredential("liausheauchang@gmail.com", "EXCUSE");
             smtp.DeliveryMethod = SmtpDeliveryMethod.Network;
             smtp.EnableSsl = true;
 
