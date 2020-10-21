@@ -132,7 +132,7 @@ namespace StockAlertDaily
             SmtpClient smtp = new SmtpClient();
             smtp.Host = "smtp.gmail.com";
             smtp.Port = 587;
-            smtp.Credentials = new System.Net.NetworkCredential("liausheauchang@gmail.com", "EXCUSEme123$567");
+            smtp.Credentials = new System.Net.NetworkCredential("liausheauchang@gmail.com", "abracadabra");
             smtp.DeliveryMethod = SmtpDeliveryMethod.Network;
             smtp.EnableSsl = true;
 

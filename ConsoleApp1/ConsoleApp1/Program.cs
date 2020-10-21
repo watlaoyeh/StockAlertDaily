@@ -5,6 +5,9 @@ using OpenQA.Selenium.Support.UI;
 using System.Threading;
 using System.IO;
 using OpenQA.Selenium.Interactions;
+using System.Data.SqlClient;
+using System.Data;
+using System.Text;
 
 namespace ConsoleApp1
 {
@@ -16,18 +19,20 @@ namespace ConsoleApp1
         static void Main(string[] args)
         {
 
+            
 
             ChromeOptions options = new ChromeOptions();
             //options.AddExtension(@"C:\Users\user\Downloads\chromedriver_win32 (2)\chromedriver.exe");
             
-
+           
             //ChromeOptions options = new ChromeOptions();
             ////options.AddArguments("--no-sandbox");            
             options.AddArguments("user-data-dir=C:/Users/user/AppData/Local/Google/Chrome/User Data/Default");
-            
-            IWebDriver driver = new ChromeDriver(options);
-
-            DirectoryInfo di;
+            //options.BinaryLocation = @"C:\Users\user\Downloads\ChromeNewDriver";
+            IWebDriver driver = new ChromeDriver(@"C:\Users\user\Downloads\ChromeNewDriver",options);
+            //IWebDriver driver = new ChromeDriver(@"C:\chromedriver\driver83", options);
+        
+        DirectoryInfo di;
 
             #region screeningStock
             string newDirectory = @"C:\_Tasks\zzzzz\_z_stock_screening\" + DateTime.Now.Year.ToString() + DateTime.Now.Month.ToString().PadLeft(2, '0') + DateTime.Now.Day.ToString().PadLeft(2, '0');
@@ -56,12 +61,12 @@ namespace ConsoleApp1
 
 
             #region remove original file
-                //string[] ResidueFiles = Directory.GetFiles(@"C:\Users\user\Downloads", "* Historical Data.csv");
-                //foreach (string file in ResidueFiles)
-                //{
-                //    File.Delete(file);
+            string[] ResidueFiles = Directory.GetFiles(@"C:\Users\user\Downloads", "* Historical Data.csv");
+            foreach (string file in ResidueFiles)
+            {
+                File.Delete(file);
 
-                //}
+            }
             #endregion
 
             #region Historical Data 
@@ -149,9 +154,9 @@ namespace ConsoleApp1
 
             //driver.FindElement(By.Id("identifierId")).SendKeys("liausheauchang@gmail.com");
             //driver.FindElement(By.CssSelector(".RveJvd.snByac")).Click();
-            ////driver.FindElement(By.XPath("//input[@type='password']")).SendKeys("EXCUSEme123$5678");
+            ////driver.FindElement(By.XPath("//input[@type='password']")).SendKeys("abracadabra");
 
-            //driver.FindElement(By.XPath("//*[@id=\"password\"]/div[1]/div/div[1]/input")).SendKeys("EXCUSEme123$567");
+            //driver.FindElement(By.XPath("//*[@id=\"password\"]/div[1]/div/div[1]/input")).SendKeys("abracadabra");
 
             //driver.FindElement(By.CssSelector(".RveJvd.snByac")).Click();
             ////driver.FindElement(By.XPath("//*[@id=\"passwordNext\"]/span/span")).Click();
@@ -201,154 +206,234 @@ namespace ConsoleApp1
             //Thread.Sleep(10000);
             ///SharesSelection("http://www2.trkd-hs.com/cimb/ui/home?lang=en", driver);
             #endregion
-//            moveFilesFromDownload();
+            //            moveFilesFromDownload();
             #region version 2
             driver.Url = ("http://investing.com");
-            SearchAndDownloadV2(@"https://www.investing.com/equities/aeon-credit-service-(m)-bhd-historical-data", driver);
-            SearchAndDownloadV2(@"https://www.investing.com/equities/airasia-bhd-historical-data", driver);
-            SearchAndDownloadV2(@"https://www.investing.com/equities/malaysia-airport-holdings-bhd-historical-data", driver);
-            SearchAndDownloadV2(@"https://www.investing.com/equities/denko-industrial-corporation-historical-data", driver);
-            SearchAndDownloadV2(@"https://www.investing.com/equities/berjaya-auto-bhd-historical-data", driver);
-            SearchAndDownloadV2(@"https://www.investing.com/equities/bimb-holdings-bhd-historical-data", driver);
-            SearchAndDownloadV2(@"https://www.investing.com/equities/cck-consolidated-holdings-historical-data", driver);
-            SearchAndDownloadV2(@"https://www.investing.com/equities/dayang-enterprise-holdings-bhd-historical-data", driver);
-            SearchAndDownloadV2(@"https://www.investing.com/equities/frontken-corporation-bhd-historical-data", driver);
-            SearchAndDownloadV2(@"https://www.investing.com/equities/greatech-technology-bhd-historical-data", driver);
-            SearchAndDownloadV2(@"https://www.investing.com/equities/jaycorp-bhd-historical-data", driver);
-            SearchAndDownloadV2(@"https://www.investing.com/equities/johore-tin-bhd-historical-data", driver);
-            SearchAndDownloadV2(@"https://www.investing.com/equities/klcc-prop-reits---stapled-sec-historical-data", driver);
-            SearchAndDownloadV2(@"https://www.investing.com/equities/lee-swee-kiat-group-bhd-historical-data", driver);
-            SearchAndDownloadV2(@"https://www.investing.com/equities/magni-tech-industries-bhd-historical-data", driver);
-            SearchAndDownloadV2(@"https://www.investing.com/equities/matrix-concepts-holdings-bhd-historical-data", driver);
-            SearchAndDownloadV2(@"https://www.investing.com/equities/malayan-banking-bhd-historical-data", driver);
-            SearchAndDownloadV2(@"https://www.investing.com/equities/pantech-group-holdings-bhd-historical-data", driver);
-            SearchAndDownloadV2(@"https://www.investing.com/equities/pentamaster-corporation-bhd-historical-data", driver);
-            SearchAndDownloadV2(@"https://www.investing.com/equities/pie-industrial-bhd-historical-data", driver);
-            SearchAndDownloadV2(@"https://www.investing.com/equities/pavilion-real-estate-inv-trust-historical-data", driver);
-            SearchAndDownloadV2(@"https://www.investing.com/equities/pintaras-jaya-bhd-historical-data", driver);
-            SearchAndDownloadV2(@"https://www.investing.com/equities/sapurakencana-petroleum-bhd-historical-data", driver);
-            SearchAndDownloadV2(@"https://www.investing.com/equities/scientex-bhd-historical-data", driver);
-            SearchAndDownloadV2(@"https://www.investing.com/equities/serba-dinamik-holdings-bhd-historical-data", driver);
-            SearchAndDownloadV2(@"https://www.investing.com/equities/sunway-bhd-historical-data", driver);
-            SearchAndDownloadV2(@"https://www.investing.com/equities/taliworks-corporation-bhd-historical-data", driver);
-            SearchAndDownloadV2(@"https://www.investing.com/equities/umw-oil-and-gas-corporation-historical-data", driver);
-            SearchAndDownloadV2(@"https://www.investing.com/equities/khee-san-bhd-historical-data", driver);
-            SearchAndDownloadV2(@"https://www.investing.com/equities/inari-amertron-bhd-historical-data", driver);
-            SearchAndDownloadV2(@"https://www.investing.com/equities/elsoft-research-bhd-historical-data", driver);
-            SearchAndDownloadV2(@"https://www.investing.com/equities/naim-holdings-bhd-historical-data", driver);
-            SearchAndDownloadV2(@"https://www.investing.com/equities/hock-seng-lee-bhd-historical-data", driver);
-            SearchAndDownloadV2(@"https://www.investing.com/equities/ibraco-bhd-historical-data", driver);
-            SearchAndDownloadV2(@"https://www.investing.com/equities/emas-kiara-industries-bhd-historical-data", driver);
-            SearchAndDownloadV2(@"https://www.investing.com/equities/syarikat-takaful-malaysia-bhd-historical-data", driver);
-            SearchAndDownloadV2(@"https://www.investing.com/equities/genting-malaysia-bhd-historical-data", driver);
-            SearchAndDownloadV2(@"https://www.investing.com/equities/yinson-holdings-bhd-historical-data", driver);
-            SearchAndDownloadV2(@"https://www.investing.com/equities/malakoff-corporation-bhd-historical-data", driver);
-            SearchAndDownloadV2(@"https://www.investing.com/equities/integrated-rubber-corporation-historical-data", driver);
-            SearchAndDownloadV2(@"https://www.investing.com/equities/eco-world-develop-group-historical-data", driver);
-            SearchAndDownloadV2(@"https://www.investing.com/equities/dialog-group-bhd-historical-data", driver);
-            SearchAndDownloadV2(@"https://www.investing.com/equities/sarawak-plantation-bhd-historical-data", driver);
-            SearchAndDownloadV2(@"https://www.investing.com/equities/gamuda-bhd-historical-data", driver);
-            SearchAndDownloadV2(@"https://www.investing.com/equities/vs-industry-bhd-historical-data", driver);
-            SearchAndDownloadV2(@"https://www.investing.com/equities/rhb-capital-bhd-historical-data", driver);
-            SearchAndDownloadV2(@"https://www.investing.com/equities/pecca-group-bhd-historical-data", driver);
-            SearchAndDownloadV2(@"https://www.investing.com/equities/dufu-tech-corp-bhd-historical-data", driver);
-            SearchAndDownloadV2(@"https://www.investing.com/equities/bumi-armada-bhd-historical-data", driver);
-            SearchAndDownloadV2(@"https://www.investing.com/equities/time-dotcom-bhd-historical-data", driver);
-            SearchAndDownloadV2(@"https://www.investing.com/equities/eco-world-international-bhd-historical-data", driver);
-            SearchAndDownloadV2(@"https://www.investing.com/equities/guan-chong-bhd-historical-data", driver);
-            SearchAndDownloadV2(@"https://www.investing.com/equities/hartalega-holdings-bhd-historical-data", driver);
-            SearchAndDownloadV2(@"https://www.investing.com/equities/ccm-duopharma-biotech-bhd-historical-data", driver);
-            SearchAndDownloadV2(@"https://www.investing.com/equities/ysp-southeast-asia-holding-bhd-historical-data", driver);
-            SearchAndDownloadV2(@"https://www.investing.com/equities/supermax-corporation-bhd-historical-data", driver);
-            SearchAndDownloadV2(@"https://www.investing.com/equities/malaysian-plantations-bhd-historical-data", driver);
-            SearchAndDownloadV2(@"https://www.investing.com/equities/aeon-co-(m)-bhd-historical-data", driver);
-            SearchAndDownloadV2(@"https://www.investing.com/equities/ammb-holdings-bhd-historical-data", driver);
-            SearchAndDownloadV2(@"https://www.investing.com/equities/carlsberg-brewery-malaysia-bhd-historical-data", driver);
-            SearchAndDownloadV2(@"https://www.investing.com/equities/faber-group-bhd-historical-data", driver);
-            SearchAndDownloadV2(@"https://www.investing.com/equities/eita-resources-bhd-historical-data", driver);
-            SearchAndDownloadV2(@"https://www.investing.com/equities/elk-desa-resources-bhd-historical-data", driver);
-            SearchAndDownloadV2(@"https://www.investing.com/equities/gas-malaysia-bhd-historical-data", driver);
-            SearchAndDownloadV2(@"https://www.investing.com/equities/guinness-anchor-bhd-historical-data", driver);
-            SearchAndDownloadV2(@"https://www.investing.com/equities/lpi-capital-bhd-historical-data", driver);
-            SearchAndDownloadV2(@"https://www.investing.com/equities/mbm-resources-bhd-historical-data", driver);
-            SearchAndDownloadV2(@"https://www.investing.com/equities/sime-darby-bhd-historical-data", driver);
-            SearchAndDownloadV2(@"https://www.investing.com/equities/slp-resources-bhd-historical-data", driver);
-            SearchAndDownloadV2(@"https://www.investing.com/equities/cypark-resources-berhad-historical-data", driver);
-            SearchAndDownloadV2(@"https://www.investing.com/equities/kpj-healthcare-bhd-historical-data", driver);
-            SearchAndDownloadV2(@"https://www.investing.com/equities/sunway-construction-group-bhd-historical-data", driver);
-            SearchAndDownloadV2(@"https://www.investing.com/equities/sunway-real-estate-invest-trust-historical-data", driver);
-            SearchAndDownloadV2(@"https://www.investing.com/equities/gabungan-aqrs-bhd-historical-data", driver);
-            SearchAndDownloadV2(@"https://www.investing.com/equities/uoa-development-bhd-historical-data", driver);
-            SearchAndDownloadV2(@"https://www.investing.com/equities/carimin-petroleum-bhd-historical-data", driver);
-            SearchAndDownloadV2(@"https://www.investing.com/equities/datasonic-group-bhd-historical-data", driver);
-            SearchAndDownloadV2(@"https://www.investing.com/equities/jhm-consolidation-bhd-historical-data", driver);
-            SearchAndDownloadV2(@"https://www.investing.com/equities/mmc-corporation-bhd-historical-data", driver);
-            SearchAndDownloadV2(@"https://www.investing.com/equities/ntpm-holdings-bhd-historical-data", driver);
-            SearchAndDownloadV2(@"https://www.investing.com/equities/ock-group-bhd-historical-data", driver);
-            SearchAndDownloadV2(@"https://www.investing.com/equities/oka-corporation-bhd-historical-data", driver);
-            SearchAndDownloadV2(@"https://www.investing.com/equities/perdana-petroleum-historical-data", driver);
-            SearchAndDownloadV2(@"https://www.investing.com/equities/pls-plantations-bhd-historical-data", driver);
-            SearchAndDownloadV2(@"https://www.investing.com/equities/rce-capital-berhad-historical-data", driver);
-            SearchAndDownloadV2(@"https://www.investing.com/equities/supercomnet-technologies-bhd-historical-data", driver);
-            SearchAndDownloadV2(@"https://www.investing.com/equities/voir-holdings-bhd-historical-data", driver);
-            SearchAndDownloadV2(@"https://www.investing.com/equities/astral-supreme-bhd-historical-data", driver);
-            SearchAndDownloadV2(@"https://www.investing.com/equities/public-bank-bhd-historical-data", driver);
-            SearchAndDownloadV2(@"https://www.investing.com/equities/muhibbah-engineering-m-bhd-historical-data", driver);
+            
+            
+            StringBuilder sbSP = new StringBuilder();
+            StringBuilder sbDropSP = new StringBuilder();
+            sbDropSP.AppendLine("DROP PROCEDURE [sp_UpdateStockName]");
+            string sqlQuery = "select URL_NM, StockName, FileNameContain from Z_MarketList where IsActive = 1";
+            //string sqlQuery = "select URL_NM, StockName, FileNameContain from Z_MarketList where IsActive = 1 AND StockName IN ('POS','CMSB','FPI','HTPADU','CJCEN','BJTOTO','MAGNUM','KPOWER','MILUX','SHH','CCM','CCB','ANCOM','PHARMA','MACPIE','ADVPKG','MALPAC','AMPROP','ASTINO','OWG','F&W','KHIND','SAB','TASCO','FCW','ALAQAR')";
+            sbSP.AppendLine("CREATE PROCEDURE [sp_UpdateStockName] AS BEGIN SET NOCOUNT ON; ");
+            using (SqlConnection connection = new SqlConnection("Server= localhost; Database=StockMarket; Integrated Security=SSPI;"))
+            using (SqlCommand command = new SqlCommand(sqlQuery, connection))
+            {
+                connection.Open();
+                using (SqlDataReader reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        //SearchAndDownloadV2(@reader["URL_NM"].ToString(), driver);
+                        sbSP.Append("UPDATE [StockMarket].[dbo].[StockMarketPredictionInitial]  SET StockName = '")
+                            .Append(@reader["StockName"].ToString())
+                            .Append("' WHERE StockName LIKE '")
+                            .Append(@reader["FileNameContain"].ToString())
+                            .Append("'")
+                            .AppendLine();
+                    }
+                }
+            }
 
-            SearchAndDownloadV2(@"https://www.investing.com/equities/sam-engineering-equipment-historical-data", driver);
-            SearchAndDownloadV2(@"https://www.investing.com/equities/willowglen-msc-bhd-historical-data", driver);
-            SearchAndDownloadV2(@"https://www.investing.com/equities/westports-holdings-bhd-historical-data", driver);
-            SearchAndDownloadV2(@"https://www.investing.com/equities/bumiputra---commerce-holdings-bhd-historical-data", driver);
-            SearchAndDownloadV2(@"https://www.investing.com/equities/ihh-healthcare-bhd-historical-data", driver);
-            SearchAndDownloadV2(@"https://www.investing.com/equities/bison-consolidated-bhd-historical-data", driver);
-            SearchAndDownloadV2(@"https://www.investing.com/equities/petronas-chemicals-group-bhd-historical-data", driver);
-            SearchAndDownloadV2(@"https://www.investing.com/equities/symphony-house-bhd-historical-data", driver);
-            SearchAndDownloadV2(@"https://www.investing.com/equities/sime-darby-plantation-historical-data", driver);
-            SearchAndDownloadV2(@"https://www.investing.com/equities/tenaga-nasional-bhd-historical-data", driver);
-            SearchAndDownloadV2(@"https://www.investing.com/equities/telekom-malaysia-bhd-historical-data", driver);
-            SearchAndDownloadV2(@"https://www.investing.com/equities/top-glove-corporation-bhd-historical-data", driver);
-            SearchAndDownloadV2(@"https://www.investing.com/equities/dksh-holdings-malaysia-berhad-historical-data", driver);
-            SearchAndDownloadV2(@"https://www.investing.com/equities/genting-plantations-bhd-historical-data", driver);
-            SearchAndDownloadV2(@"https://www.investing.com/equities/igb-real-estate-investment-trust-historical-data", driver);
-            SearchAndDownloadV2(@"https://www.investing.com/equities/kuala-lumpur-kepong-bhd-historical-data", driver);
-            SearchAndDownloadV2(@"https://www.investing.com/equities/kossan-rubber-industries-bhd-historical-data", driver);
-            SearchAndDownloadV2(@"https://www.investing.com/equities/lbs-bina-group-bhd-historical-data", driver);
-            SearchAndDownloadV2(@"https://www.investing.com/equities/mah-sing-group-bhd-historical-data", driver);
-            SearchAndDownloadV2(@"https://www.investing.com/equities/power-root-bhd-historical-data", driver);
-            SearchAndDownloadV2(@"https://www.investing.com/equities/skp-resources-bhd-historical-data", driver);
-            SearchAndDownloadV2(@"https://www.investing.com/equities/success-transformer-corp-historical-data", driver);
-            SearchAndDownloadV2(@"https://www.investing.com/equities/uchi-technologies-bhd-historical-data", driver);
-            SearchAndDownloadV2(@"https://www.investing.com/equities/ioi-corporation-bhd-historical-data", driver);
-            SearchAndDownloadV2(@"https://www.investing.com/equities/misc-bhd-historical-data", driver);
-            SearchAndDownloadV2(@"https://www.investing.com/equities/malaysian-resources-corporation-historical-data", driver);
-            SearchAndDownloadV2(@"https://www.investing.com/equities/my-eg-services-bhd-historical-data", driver);
-            SearchAndDownloadV2(@"https://www.investing.com/equities/drb---hicom-bhd-historical-data", driver);
-            SearchAndDownloadV2(@"https://www.investing.com/equities/lii-hen-industries-bhd-historical-data", driver);
-            SearchAndDownloadV2(@"https://www.investing.com/equities/ea-technique-m-bhd-historical-data", driver);
-            SearchAndDownloadV2(@"https://www.investing.com/equities/ijm-corporation-bhd-historical-data", driver);
-            SearchAndDownloadV2(@"https://www.investing.com/equities/mega-first-corporation-bhd-historical-data", driver);
+                  
+            sbSP.AppendLine(" END");
+
+            using (SqlConnection connection = new SqlConnection("Server= localhost; Database=StockMarket; Integrated Security=SSPI;"))
+            {
+                using (SqlCommand cmd = new SqlCommand(sbDropSP.ToString(), connection))
+                {
+                    connection.Open();
+                    cmd.CommandType = CommandType.Text;
+                    cmd.ExecuteNonQuery();
+                    connection.Close();
+                }
+
+                using (SqlCommand cmd = new SqlCommand(sbSP.ToString(), connection))
+                {
+                    connection.Open();
+                    cmd.CommandType = CommandType.Text;
+                    cmd.ExecuteNonQuery();
+                    connection.Close();
+                }
+            }
+            //SearchAndDownloadV2(@"https://www.investing.com/equities/aeon-credit-service-(m)-bhd-historical-data", driver);
+            //SearchAndDownloadV2(@"https://www.investing.com/equities/airasia-bhd-historical-data", driver);
+            //SearchAndDownloadV2(@"https://www.investing.com/equities/malaysia-airport-holdings-bhd-historical-data", driver);
+            //SearchAndDownloadV2(@"https://www.investing.com/equities/denko-industrial-corporation-historical-data", driver);
+            //SearchAndDownloadV2(@"https://www.investing.com/equities/berjaya-auto-bhd-historical-data", driver);
+            //SearchAndDownloadV2(@"https://www.investing.com/equities/bimb-holdings-bhd-historical-data", driver);
+            //SearchAndDownloadV2(@"https://www.investing.com/equities/cck-consolidated-holdings-historical-data", driver);
+            //SearchAndDownloadV2(@"https://www.investing.com/equities/dayang-enterprise-holdings-bhd-historical-data", driver);
+            //SearchAndDownloadV2(@"https://www.investing.com/equities/frontken-corporation-bhd-historical-data", driver);
+            //SearchAndDownloadV2(@"https://www.investing.com/equities/greatech-technology-bhd-historical-data", driver);
+            //SearchAndDownloadV2(@"https://www.investing.com/equities/jaycorp-bhd-historical-data", driver);
+            //SearchAndDownloadV2(@"https://www.investing.com/equities/johore-tin-bhd-historical-data", driver);
+            //SearchAndDownloadV2(@"https://www.investing.com/equities/klcc-prop-reits---stapled-sec-historical-data", driver);
+            //SearchAndDownloadV2(@"https://www.investing.com/equities/lee-swee-kiat-group-bhd-historical-data", driver);
+            //SearchAndDownloadV2(@"https://www.investing.com/equities/magni-tech-industries-bhd-historical-data", driver);
+            //SearchAndDownloadV2(@"https://www.investing.com/equities/matrix-concepts-holdings-bhd-historical-data", driver);
+            //SearchAndDownloadV2(@"https://www.investing.com/equities/malayan-banking-bhd-historical-data", driver);
+            //SearchAndDownloadV2(@"https://www.investing.com/equities/pantech-group-holdings-bhd-historical-data", driver);
+            //SearchAndDownloadV2(@"https://www.investing.com/equities/pentamaster-corporation-bhd-historical-data", driver);
+            //SearchAndDownloadV2(@"https://www.investing.com/equities/pie-industrial-bhd-historical-data", driver);
+            //SearchAndDownloadV2(@"https://www.investing.com/equities/pavilion-real-estate-inv-trust-historical-data", driver);
+            //SearchAndDownloadV2(@"https://www.investing.com/equities/pintaras-jaya-bhd-historical-data", driver);
+            //SearchAndDownloadV2(@"https://www.investing.com/equities/sapurakencana-petroleum-bhd-historical-data", driver);
+            //SearchAndDownloadV2(@"https://www.investing.com/equities/scientex-bhd-historical-data", driver);
+            //SearchAndDownloadV2(@"https://www.investing.com/equities/serba-dinamik-holdings-bhd-historical-data", driver);
+            //SearchAndDownloadV2(@"https://www.investing.com/equities/sunway-bhd-historical-data", driver);
+            //SearchAndDownloadV2(@"https://www.investing.com/equities/taliworks-corporation-bhd-historical-data", driver);
+            //SearchAndDownloadV2(@"https://www.investing.com/equities/umw-oil-and-gas-corporation-historical-data", driver);
+            //SearchAndDownloadV2(@"https://www.investing.com/equities/khee-san-bhd-historical-data", driver);
+            //SearchAndDownloadV2(@"https://www.investing.com/equities/inari-amertron-bhd-historical-data", driver);
+            //SearchAndDownloadV2(@"https://www.investing.com/equities/elsoft-research-bhd-historical-data", driver);
+            //SearchAndDownloadV2(@"https://www.investing.com/equities/naim-holdings-bhd-historical-data", driver);
+            //SearchAndDownloadV2(@"https://www.investing.com/equities/hock-seng-lee-bhd-historical-data", driver);
+            //SearchAndDownloadV2(@"https://www.investing.com/equities/ibraco-bhd-historical-data", driver);
+            //SearchAndDownloadV2(@"https://www.investing.com/equities/emas-kiara-industries-bhd-historical-data", driver);
+            //SearchAndDownloadV2(@"https://www.investing.com/equities/syarikat-takaful-malaysia-bhd-historical-data", driver);
+            //SearchAndDownloadV2(@"https://www.investing.com/equities/genting-malaysia-bhd-historical-data", driver);
+            //SearchAndDownloadV2(@"https://www.investing.com/equities/yinson-holdings-bhd-historical-data", driver);
+            //SearchAndDownloadV2(@"https://www.investing.com/equities/malakoff-corporation-bhd-historical-data", driver);
+            //SearchAndDownloadV2(@"https://www.investing.com/equities/integrated-rubber-corporation-historical-data", driver);
+            //SearchAndDownloadV2(@"https://www.investing.com/equities/eco-world-develop-group-historical-data", driver);
+            //SearchAndDownloadV2(@"https://www.investing.com/equities/dialog-group-bhd-historical-data", driver);
+            //SearchAndDownloadV2(@"https://www.investing.com/equities/sarawak-plantation-bhd-historical-data", driver);
+            //SearchAndDownloadV2(@"https://www.investing.com/equities/gamuda-bhd-historical-data", driver);
+            //SearchAndDownloadV2(@"https://www.investing.com/equities/vs-industry-bhd-historical-data", driver);
+            //SearchAndDownloadV2(@"https://www.investing.com/equities/rhb-capital-bhd-historical-data", driver);
+            //SearchAndDownloadV2(@"https://www.investing.com/equities/pecca-group-bhd-historical-data", driver);
+            //SearchAndDownloadV2(@"https://www.investing.com/equities/dufu-tech-corp-bhd-historical-data", driver);
+            //SearchAndDownloadV2(@"https://www.investing.com/equities/bumi-armada-bhd-historical-data", driver);
+            //SearchAndDownloadV2(@"https://www.investing.com/equities/time-dotcom-bhd-historical-data", driver);
+            //SearchAndDownloadV2(@"https://www.investing.com/equities/eco-world-international-bhd-historical-data", driver);
+            //SearchAndDownloadV2(@"https://www.investing.com/equities/guan-chong-bhd-historical-data", driver);
+            //SearchAndDownloadV2(@"https://www.investing.com/equities/hartalega-holdings-bhd-historical-data", driver);
+            //SearchAndDownloadV2(@"https://www.investing.com/equities/ccm-duopharma-biotech-bhd-historical-data", driver);
+            //SearchAndDownloadV2(@"https://www.investing.com/equities/ysp-southeast-asia-holding-bhd-historical-data", driver);
+            //SearchAndDownloadV2(@"https://www.investing.com/equities/supermax-corporation-bhd-historical-data", driver);
+            //SearchAndDownloadV2(@"https://www.investing.com/equities/malaysian-plantations-bhd-historical-data", driver);
+            //SearchAndDownloadV2(@"https://www.investing.com/equities/aeon-co-(m)-bhd-historical-data", driver);
+            //SearchAndDownloadV2(@"https://www.investing.com/equities/ammb-holdings-bhd-historical-data", driver);
+            //SearchAndDownloadV2(@"https://www.investing.com/equities/carlsberg-brewery-malaysia-bhd-historical-data", driver);
+            //SearchAndDownloadV2(@"https://www.investing.com/equities/faber-group-bhd-historical-data", driver);
+            //SearchAndDownloadV2(@"https://www.investing.com/equities/eita-resources-bhd-historical-data", driver);
+            //SearchAndDownloadV2(@"https://www.investing.com/equities/elk-desa-resources-bhd-historical-data", driver);
+            //SearchAndDownloadV2(@"https://www.investing.com/equities/gas-malaysia-bhd-historical-data", driver);
+            //SearchAndDownloadV2(@"https://www.investing.com/equities/guinness-anchor-bhd-historical-data", driver);
+            //SearchAndDownloadV2(@"https://www.investing.com/equities/lpi-capital-bhd-historical-data", driver);
+            //SearchAndDownloadV2(@"https://www.investing.com/equities/mbm-resources-bhd-historical-data", driver);
+            //SearchAndDownloadV2(@"https://www.investing.com/equities/sime-darby-bhd-historical-data", driver);
+            //SearchAndDownloadV2(@"https://www.investing.com/equities/slp-resources-bhd-historical-data", driver);
+            //SearchAndDownloadV2(@"https://www.investing.com/equities/cypark-resources-berhad-historical-data", driver);
+            //SearchAndDownloadV2(@"https://www.investing.com/equities/kpj-healthcare-bhd-historical-data", driver);
+            //SearchAndDownloadV2(@"https://www.investing.com/equities/sunway-construction-group-bhd-historical-data", driver);
+            //SearchAndDownloadV2(@"https://www.investing.com/equities/sunway-real-estate-invest-trust-historical-data", driver);
+            //SearchAndDownloadV2(@"https://www.investing.com/equities/gabungan-aqrs-bhd-historical-data", driver);
+            //SearchAndDownloadV2(@"https://www.investing.com/equities/uoa-development-bhd-historical-data", driver);
+            //SearchAndDownloadV2(@"https://www.investing.com/equities/carimin-petroleum-bhd-historical-data", driver);
+            //SearchAndDownloadV2(@"https://www.investing.com/equities/datasonic-group-bhd-historical-data", driver);
+            //SearchAndDownloadV2(@"https://www.investing.com/equities/jhm-consolidation-bhd-historical-data", driver);
+            //SearchAndDownloadV2(@"https://www.investing.com/equities/mmc-corporation-bhd-historical-data", driver);
+            //SearchAndDownloadV2(@"https://www.investing.com/equities/ntpm-holdings-bhd-historical-data", driver);
+            //SearchAndDownloadV2(@"https://www.investing.com/equities/ock-group-bhd-historical-data", driver);
+            //SearchAndDownloadV2(@"https://www.investing.com/equities/oka-corporation-bhd-historical-data", driver);
+            //SearchAndDownloadV2(@"https://www.investing.com/equities/perdana-petroleum-historical-data", driver);
+            //SearchAndDownloadV2(@"https://www.investing.com/equities/pls-plantations-bhd-historical-data", driver);
+            //SearchAndDownloadV2(@"https://www.investing.com/equities/rce-capital-berhad-historical-data", driver);
+            //SearchAndDownloadV2(@"https://www.investing.com/equities/supercomnet-technologies-bhd-historical-data", driver);
+            //SearchAndDownloadV2(@"https://www.investing.com/equities/voir-holdings-bhd-historical-data", driver);
+            //SearchAndDownloadV2(@"https://www.investing.com/equities/astral-supreme-bhd-historical-data", driver);
+            //SearchAndDownloadV2(@"https://www.investing.com/equities/public-bank-bhd-historical-data", driver);
+            //SearchAndDownloadV2(@"https://www.investing.com/equities/muhibbah-engineering-m-bhd-historical-data", driver);
+
+            //SearchAndDownloadV2(@"https://www.investing.com/equities/sam-engineering-equipment-historical-data", driver);
+            //SearchAndDownloadV2(@"https://www.investing.com/equities/willowglen-msc-bhd-historical-data", driver);
+            //SearchAndDownloadV2(@"https://www.investing.com/equities/westports-holdings-bhd-historical-data", driver);
+            //SearchAndDownloadV2(@"https://www.investing.com/equities/bumiputra---commerce-holdings-bhd-historical-data", driver);
+            //SearchAndDownloadV2(@"https://www.investing.com/equities/ihh-healthcare-bhd-historical-data", driver);
+            //SearchAndDownloadV2(@"https://www.investing.com/equities/bison-consolidated-bhd-historical-data", driver);
+            //SearchAndDownloadV2(@"https://www.investing.com/equities/petronas-chemicals-group-bhd-historical-data", driver);
+            //SearchAndDownloadV2(@"https://www.investing.com/equities/symphony-house-bhd-historical-data", driver);
+            //SearchAndDownloadV2(@"https://www.investing.com/equities/sime-darby-plantation-historical-data", driver);
+            //SearchAndDownloadV2(@"https://www.investing.com/equities/tenaga-nasional-bhd-historical-data", driver);
+            //SearchAndDownloadV2(@"https://www.investing.com/equities/telekom-malaysia-bhd-historical-data", driver);
+            //SearchAndDownloadV2(@"https://www.investing.com/equities/top-glove-corporation-bhd-historical-data", driver);
+            //SearchAndDownloadV2(@"https://www.investing.com/equities/dksh-holdings-malaysia-berhad-historical-data", driver);
+            //SearchAndDownloadV2(@"https://www.investing.com/equities/genting-plantations-bhd-historical-data", driver);
+            //SearchAndDownloadV2(@"https://www.investing.com/equities/igb-real-estate-investment-trust-historical-data", driver);
+            //SearchAndDownloadV2(@"https://www.investing.com/equities/kuala-lumpur-kepong-bhd-historical-data", driver);
+            //SearchAndDownloadV2(@"https://www.investing.com/equities/kossan-rubber-industries-bhd-historical-data", driver);
+            //SearchAndDownloadV2(@"https://www.investing.com/equities/lbs-bina-group-bhd-historical-data", driver);
+            //SearchAndDownloadV2(@"https://www.investing.com/equities/mah-sing-group-bhd-historical-data", driver);
+            //SearchAndDownloadV2(@"https://www.investing.com/equities/power-root-bhd-historical-data", driver);
+            //SearchAndDownloadV2(@"https://www.investing.com/equities/skp-resources-bhd-historical-data", driver);
+            //SearchAndDownloadV2(@"https://www.investing.com/equities/success-transformer-corp-historical-data", driver);
+            //SearchAndDownloadV2(@"https://www.investing.com/equities/uchi-technologies-bhd-historical-data", driver);
+            //SearchAndDownloadV2(@"https://www.investing.com/equities/ioi-corporation-bhd-historical-data", driver);
+            //SearchAndDownloadV2(@"https://www.investing.com/equities/misc-bhd-historical-data", driver);
+            //SearchAndDownloadV2(@"https://www.investing.com/equities/malaysian-resources-corporation-historical-data", driver);
+            //SearchAndDownloadV2(@"https://www.investing.com/equities/my-eg-services-bhd-historical-data", driver);
+            //SearchAndDownloadV2(@"https://www.investing.com/equities/drb---hicom-bhd-historical-data", driver);
+            //SearchAndDownloadV2(@"https://www.investing.com/equities/lii-hen-industries-bhd-historical-data", driver);
+            //SearchAndDownloadV2(@"https://www.investing.com/equities/ea-technique-m-bhd-historical-data", driver);
+            //SearchAndDownloadV2(@"https://www.investing.com/equities/ijm-corporation-bhd-historical-data", driver);
+            //SearchAndDownloadV2(@"https://www.investing.com/equities/mega-first-corporation-bhd-historical-data", driver);
 
 
-            SearchAndDownloadV2(@"https://www.investing.com/equities/ta-ann-holdings-bhd-historical-data", driver);
-            SearchAndDownloadV2(@"https://www.investing.com/equities/ql-resources-bhd-historical-data", driver);
-            SearchAndDownloadV2(@"https://www.investing.com/equities/chin-well-holdings-bhd-historical-data", driver);
-            SearchAndDownloadV2(@"https://www.investing.com/equities/padini-holdings-bhd-historical-data", driver);
-            SearchAndDownloadV2(@"https://www.investing.com/equities/pesona-metro-holdings-bhd-historical-data", driver);
-            SearchAndDownloadV2(@"https://www.investing.com/equities/poh-huat-resources-holdings-historical-data", driver);
-            SearchAndDownloadV2(@"https://www.investing.com/equities/perak-transit-bhd-historical-data", driver);
-            SearchAndDownloadV2(@"https://www.investing.com/equities/favelle-favco-bhd-historical-data", driver);
-            SearchAndDownloadV2(@"https://www.investing.com/equities/lotte-chemical-titan-historical-data", driver);
-            SearchAndDownloadV2(@"https://www.investing.com/equities/mrcb-quill-unit-historical-data", driver);
-            SearchAndDownloadV2(@"https://www.investing.com/equities/sp-setia-bhd-historical-data", driver);
-            SearchAndDownloadV2(@"https://www.investing.com/equities/umw-holdings-bhd-historical-data", driver);
-            SearchAndDownloadV2(@"https://www.investing.com/equities/wah-seong-corporation-bhd-historical-data", driver);
-            SearchAndDownloadV2(@"https://www.investing.com/equities/ytl-hospitality-reit-historical-data", driver);
-            SearchAndDownloadV2(@"https://www.investing.com/equities/malaysian-pacific-industries-historical-data", driver);
-            SearchAndDownloadV2(@"https://www.investing.com/equities/pestech-international-bhd-historical-data", driver);
-            SearchAndDownloadV2(@"https://www.investing.com/equities/petra-energy-bhd-historical-data", driver);
-            SearchAndDownloadV2(@"https://www.investing.com/equities/hibiscus-petroleum-bhd-historical-data", driver);
-            SearchAndDownloadV2(@"https://www.investing.com/equities/sime-darby-property-historical-data", driver);
-            SearchAndDownloadV2(@"https://www.investing.com/equities/green-packet-bhd-historical-data", driver);
+            //SearchAndDownloadV2(@"https://www.investing.com/equities/ta-ann-holdings-bhd-historical-data", driver);
+            //SearchAndDownloadV2(@"https://www.investing.com/equities/ql-resources-bhd-historical-data", driver);
+            //SearchAndDownloadV2(@"https://www.investing.com/equities/chin-well-holdings-bhd-historical-data", driver);
+            //SearchAndDownloadV2(@"https://www.investing.com/equities/padini-holdings-bhd-historical-data", driver);
+            //SearchAndDownloadV2(@"https://www.investing.com/equities/pesona-metro-holdings-bhd-historical-data", driver);
+            //SearchAndDownloadV2(@"https://www.investing.com/equities/poh-huat-resources-holdings-historical-data", driver);
+            //SearchAndDownloadV2(@"https://www.investing.com/equities/perak-transit-bhd-historical-data", driver);
+            //SearchAndDownloadV2(@"https://www.investing.com/equities/favelle-favco-bhd-historical-data", driver);
+            //SearchAndDownloadV2(@"https://www.investing.com/equities/lotte-chemical-titan-historical-data", driver);
+            //SearchAndDownloadV2(@"https://www.investing.com/equities/mrcb-quill-unit-historical-data", driver);
+            //SearchAndDownloadV2(@"https://www.investing.com/equities/sp-setia-bhd-historical-data", driver);
+            //SearchAndDownloadV2(@"https://www.investing.com/equities/umw-holdings-bhd-historical-data", driver);
+            //SearchAndDownloadV2(@"https://www.investing.com/equities/wah-seong-corporation-bhd-historical-data", driver);
+            //SearchAndDownloadV2(@"https://www.investing.com/equities/ytl-hospitality-reit-historical-data", driver);
+            //SearchAndDownloadV2(@"https://www.investing.com/equities/malaysian-pacific-industries-historical-data", driver);
+            //SearchAndDownloadV2(@"https://www.investing.com/equities/pestech-international-bhd-historical-data", driver);
+            //SearchAndDownloadV2(@"https://www.investing.com/equities/petra-energy-bhd-historical-data", driver);
+            //SearchAndDownloadV2(@"https://www.investing.com/equities/hibiscus-petroleum-bhd-historical-data", driver);
+            //SearchAndDownloadV2(@"https://www.investing.com/equities/sime-darby-property-historical-data", driver);
+            //SearchAndDownloadV2(@"https://www.investing.com/equities/green-packet-bhd-historical-data", driver);
+
+
+            //SearchAndDownloadV2(@"https://www.investing.com/equities/scgm-bhd-historical-data", driver);
+            //SearchAndDownloadV2(@"https://www.investing.com/equities/samchem-holdings-bhd-historical-data", driver);
+            //SearchAndDownloadV2(@"https://www.investing.com/equities/thong-guan-industries-bhd-historical-data", driver);
+            //SearchAndDownloadV2(@"https://www.investing.com/equities/foundpac-group-bhd-historical-data", driver);
+            //SearchAndDownloadV2(@"https://www.investing.com/equities/jf-tech-historical-data", driver);
+            //SearchAndDownloadV2(@"https://www.investing.com/equities/globetronics-tech-bhd-historical-data", driver);
+            //SearchAndDownloadV2(@"https://www.investing.com/equities/bp-plastics-holding-bhd-historical-data", driver);
+            //SearchAndDownloadV2(@"https://www.investing.com/equities/vitrox-corporation-bhd-historical-data", driver);
+            //SearchAndDownloadV2(@"https://www.investing.com/equities/muar-ban-lee-group-bhd-historical-data", driver);
+            //SearchAndDownloadV2(@"https://www.investing.com/equities/luxchem-corporation-bhd-historical-data", driver);
+            //SearchAndDownloadV2(@"https://www.investing.com/equities/fajarbaru-builder-group-bhd-historical-data", driver);
+            //SearchAndDownloadV2(@"https://www.investing.com/equities/uwc-bhd-historical-data", driver);
+            //SearchAndDownloadV2(@"https://www.investing.com/equities/nova-wellness-historical-data", driver);
+            //SearchAndDownloadV2(@"https://www.investing.com/equities/kotra-industries-bhd-historical-data", driver);
+            //SearchAndDownloadV2(@"https://www.investing.com/equities/mi-equipment-historical-data", driver);
+            //SearchAndDownloadV2(@"https://www.investing.com/equities/press-metal-bhd-historical-data", driver);
+            //SearchAndDownloadV2(@"https://www.investing.com/equities/bursa-malaysia-bhd-historical-data", driver);
+            //SearchAndDownloadV2(@"https://www.investing.com/equities/ecs-ict-bhd-historical-data", driver);
+
+
+
+
+
+
+
+
+
+
+
+
 
             //Added because Public Bank file always left out
             Thread.Sleep(5000);
@@ -434,25 +519,25 @@ namespace ConsoleApp1
             //driver.Navigate(url);
             driver.Url = url;
             #region change date range
-            /*
-            IJavaScriptExecutor js = driver as IJavaScriptExecutor;
-            WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(5));
-            IWebElement elementDatePicker = driver.FindElement(By.Id("picker"));
-            WebDriverWait wait2 = new WebDriverWait(driver, TimeSpan.FromSeconds(5));
-            js.ExecuteScript("arguments[0].setAttribute(arguments[1],arguments[2]);",elementDatePicker,"value",getDateRange());
+            
+            //IJavaScriptExecutor js = driver as IJavaScriptExecutor;
+            //WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(5));
+            //IWebElement elementDatePicker = driver.FindElement(By.Id("picker"));
+            //WebDriverWait wait2 = new WebDriverWait(driver, TimeSpan.FromSeconds(5));
+            //js.ExecuteScript("arguments[0].setAttribute(arguments[1],arguments[2]);",elementDatePicker,"value",getDateRange());
 
             
             
-            Thread.Sleep(5000);
-            driver.FindElement(By.XPath("//div[@id='widgetField']")).Click();
-            Thread.Sleep(15000);
-            IWebElement element = driver.FindElement(By.Id("applyBtn"));
+            //Thread.Sleep(5000);
+            //driver.FindElement(By.XPath("//div[@id='widgetField']")).Click();
+            //Thread.Sleep(15000);
+            //IWebElement element = driver.FindElement(By.Id("applyBtn"));
             
 
-            Actions actions = new Actions(driver);
-            actions.MoveToElement(element).Click().Perform();
-            //driver.FindElement(By.Id("applyBtn")).Click();
-            */
+            //Actions actions = new Actions(driver);
+            //actions.MoveToElement(element).Click().Perform();
+            ////driver.FindElement(By.Id("applyBtn")).Click();
+           
             #endregion
 
             Thread.Sleep(5000);
@@ -464,7 +549,7 @@ namespace ConsoleApp1
             driver.Url = url;
             IJavaScriptExecutor js = driver as IJavaScriptExecutor;
             driver.FindElement(By.Id("frmLogin_userID")).SendKeys("watlaoyeh80");
-            driver.FindElement(By.Id("frmLogin_password")).SendKeys("EXCUSEME81");
+            driver.FindElement(By.Id("frmLogin_password")).SendKeys("abracadabra");
 
             SelectElement tradingSystem = new SelectElement(driver.FindElement(By.Name("selTradingHall")));
             tradingSystem.SelectByValue("tcplus_old");

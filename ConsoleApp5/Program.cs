@@ -24,26 +24,37 @@ namespace ConsoleApp5
     }
     class Program
     {
-        static int dayCount = 2;
+        static int dayCount = 0;
         static List<DailyStockPick> stockPickListUSA = new List<DailyStockPick>();
         static List<DailyStockPick> stockPickListMY = new List<DailyStockPick>();
         static List<DailyStockPick> stockPickListSG = new List<DailyStockPick>();
         static List<DailyStockPick> stockPickListHK = new List<DailyStockPick>();
         static void Main(string[] args)
         {
-
-
             ChromeOptions options = new ChromeOptions();
-            //options.AddExtension(@"C:\Users\LiauS\source\repos\StockAlertDaily\ConsoleApp5\bin\Debug\chromedriver.exe");
+            //options.AddExtension(@"C:\Users\user\Downloads\chromedriver_win32 (2)\chromedriver.exe");
 
 
             //ChromeOptions options = new ChromeOptions();
             ////options.AddArguments("--no-sandbox");            
-            options.AddArguments("user-data-dir=C:/Users/LiauS/AppData/Local/Google/Chrome/User Data/Default");
-
-            IWebDriver driver = new ChromeDriver(options);
+            options.AddArguments("user-data-dir=C:/Users/user/AppData/Local/Google/Chrome/User Data/Default");
+            //options.BinaryLocation = @"C:\Users\user\Downloads\ChromeNewDriver";
+            IWebDriver driver = new ChromeDriver(@"C:\Users\user\Downloads\ChromeNewDriver", options);
+            //
             //IWebDriver driver = new ChromeDriver();
             DirectoryInfo di;
+
+            //ChromeOptions options = new ChromeOptions();
+            ////options.AddExtension(@"C:\Users\LiauS\source\repos\StockAlertDaily\ConsoleApp5\bin\Debug\chromedriver.exe");
+
+
+            ////ChromeOptions options = new ChromeOptions();
+            //////options.AddArguments("--no-sandbox");            
+            //options.AddArguments("user-data-dir=C:/Users/LiauS/AppData/Local/Google/Chrome/User Data/Default");
+
+            //IWebDriver driver = new ChromeDriver(options);
+            ////IWebDriver driver = new ChromeDriver();
+            //DirectoryInfo di;
 
             #region screeningStock
             string newDirectory = @"C:\_Tasks\zzzzz\_z_stock_screening\" + DateTime.Now.Year.ToString() + DateTime.Now.Month.ToString().PadLeft(2, '0') + DateTime.Now.Day.ToString().PadLeft(2, '0');
@@ -165,9 +176,9 @@ namespace ConsoleApp5
 
             //driver.FindElement(By.Id("identifierId")).SendKeys("liausheauchang@gmail.com");
             //driver.FindElement(By.CssSelector(".RveJvd.snByac")).Click();
-            ////driver.FindElement(By.XPath("//input[@type='password']")).SendKeys("EXCUSEme123$5678");
+            ////driver.FindElement(By.XPath("//input[@type='password']")).SendKeys("abracadabra");
 
-            //driver.FindElement(By.XPath("//*[@id=\"password\"]/div[1]/div/div[1]/input")).SendKeys("EXCUSEme123$567");
+            //driver.FindElement(By.XPath("//*[@id=\"password\"]/div[1]/div/div[1]/input")).SendKeys("abracadabra");
 
             //driver.FindElement(By.CssSelector(".RveJvd.snByac")).Click();
             ////driver.FindElement(By.XPath("//*[@id=\"passwordNext\"]/span/span")).Click();
@@ -370,7 +381,7 @@ namespace ConsoleApp5
             //Added because Public Bank file always left out
             Thread.Sleep(5000);
 
-            moveFilesFromDownload();
+            //moveFilesFromDownload();
             #endregion
 
             //driver.Url = ("http://investing.com");
@@ -570,7 +581,7 @@ namespace ConsoleApp5
             SmtpClient smtp = new SmtpClient();
             smtp.Host = "smtp.gmail.com";
             smtp.Port = 587;
-            smtp.Credentials = new System.Net.NetworkCredential("liausheauchang@gmail.com", "EXCUSE");
+            smtp.Credentials = new System.Net.NetworkCredential("liausheauchang@gmail.com", "abracadabra");
             smtp.DeliveryMethod = SmtpDeliveryMethod.Network;
             smtp.EnableSsl = true;
 
@@ -998,7 +1009,7 @@ namespace ConsoleApp5
             driver.Url = url;
             IJavaScriptExecutor js = driver as IJavaScriptExecutor;
             driver.FindElement(By.Id("frmLogin_userID")).SendKeys("watlaoyeh80");
-            driver.FindElement(By.Id("frmLogin_password")).SendKeys("EXCUSEME81");
+            driver.FindElement(By.Id("frmLogin_password")).SendKeys("abracadabra");
 
             SelectElement tradingSystem = new SelectElement(driver.FindElement(By.Name("selTradingHall")));
             tradingSystem.SelectByValue("tcplus_old");

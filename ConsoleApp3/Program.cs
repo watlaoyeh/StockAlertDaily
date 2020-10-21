@@ -149,9 +149,9 @@ namespace ConsoleApp3
 
             //driver.FindElement(By.Id("identifierId")).SendKeys("liausheauchang@gmail.com");
             //driver.FindElement(By.CssSelector(".RveJvd.snByac")).Click();
-            ////driver.FindElement(By.XPath("//input[@type='password']")).SendKeys("EXCUSEme123$5678");
+            ////driver.FindElement(By.XPath("//input[@type='password']")).SendKeys("abracadabra");
 
-            //driver.FindElement(By.XPath("//*[@id=\"password\"]/div[1]/div/div[1]/input")).SendKeys("EXCUSEme123$567");
+            //driver.FindElement(By.XPath("//*[@id=\"password\"]/div[1]/div/div[1]/input")).SendKeys("abracadabra");
 
             //driver.FindElement(By.CssSelector(".RveJvd.snByac")).Click();
             ////driver.FindElement(By.XPath("//*[@id=\"passwordNext\"]/span/span")).Click();
@@ -464,7 +464,7 @@ namespace ConsoleApp3
             driver.Url = url;
             IJavaScriptExecutor js = driver as IJavaScriptExecutor;
             driver.FindElement(By.Id("frmLogin_userID")).SendKeys("watlaoyeh80");
-            driver.FindElement(By.Id("frmLogin_password")).SendKeys("EXCUSEME81");
+            driver.FindElement(By.Id("frmLogin_password")).SendKeys("abracadabra");
 
             SelectElement tradingSystem = new SelectElement(driver.FindElement(By.Name("selTradingHall")));
             tradingSystem.SelectByValue("tcplus_old");

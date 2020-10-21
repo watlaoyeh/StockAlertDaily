@@ -112,7 +112,7 @@ namespace StockAlertDaily_2020_Step2_CHOONHO
             SmtpClient smtp = new SmtpClient();
             smtp.Host = "smtp.gmail.com";
             smtp.Port = 587;
-            smtp.Credentials = new System.Net.NetworkCredential("liausheauchang@gmail.com", "EXCUSEme123$567*90");
+            smtp.Credentials = new System.Net.NetworkCredential("liausheauchang@gmail.com", "abracadabra*90");
             smtp.DeliveryMethod = SmtpDeliveryMethod.Network;
             smtp.EnableSsl = true;
 
